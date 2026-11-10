@@ -2,6 +2,7 @@ asttokens==3.0.2
 colorama==0.4.6
 comm==0.2.3
 contourpy==1.4.0
+coverage==7.17.2
 cycler==0.12.1
 debugpy==1.8.22
 executing==2.3.0
@@ -29,6 +30,7 @@ pure_eval==0.2.4
 Pygments==2.21.0
 pyparsing==3.3.3
 pytest==9.2.0
+pytest-cov==7.1.0
 python-dateutil==4.0.0
 pyzmq==27.2.0
 ruff==0.17.4
