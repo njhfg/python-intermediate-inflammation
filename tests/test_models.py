@@ -7,58 +7,42 @@ import pytest
 
 from inflammation.models import daily_mean, daily_max, daily_min
 
-def test_daily_mean_zeros():
-    """Test that mean function works for an array of zeros."""
-    
 
-    test_input = np.array([[0, 0],
-                           [0, 0],
-                           [0, 0]])
-    test_result = np.array([0, 0])
+@pytest.mark.parametrize(
+        "test, expected",
+        [
+            ([ [0,0], [0,0], [0,0] ], [0,0]),
+            ([ [1,2], [3,4], [5,6] ], [3,4])
+        ])
 
-    # Need to use Numpy testing functions to compare arrays
-    npt.assert_array_equal(daily_mean(test_input), test_result)
-
-
-def test_daily_mean_integers():
-    """Test that mean function works for an array of positive integers."""
-
-    test_input = np.array([[1, 2],
-                           [3, 4],
-                           [5, 6]])
-    test_result = np.array([3, 4])
-
-    # Need to use Numpy testing functions to compare arrays
-    npt.assert_array_equal(daily_mean(test_input), test_result)
-
-def test_daily_max_nan():
-    """Test that the max function works when thre is a nan value."""
-
-    test_input = np.array([[1, 2],
-                           [30, np.nan], 
-                           [1, 20]])
-    test_result = np.array([30, np.nan])
-
-    #Check if the arrays are the same
-    npt.assert_array_equal(daily_max(test_input), test_result)
-
-def test_daily_min_integers():
-    """Test the min function with integers"""
-
-    test_input = np.array([[1, 3],
-                           [56, 9],
-                           [0, 2]])
-
-    test_result = np.array([0, 2])
-
-    #Check if the arrays are the same
-    npt.assert_array_equal(daily_min(test_input), test_result)
+def test_daily_mean(test, expected):
+    npt.assert_array_equal(daily_mean(np.array(test)), np.array(expected))
 
 def test_daily_min_string():
     """Test for TypeError when passing strings."""
 
     with pytest.raises(TypeError):
         error_expected = daily_min([['Hello', 'there'], ['General', 'Kenobi']])
+
+@pytest.mark.parametrize(
+        "test, expected",
+        [
+            ([ [1,3], [56,9], [0,2] ], [0,2])
+        ])
+
+def test_daily_min(test, expected):
+    npt.assert_array_equal(daily_min(np.array(test)), np.array(expected))
+
+@pytest.mark.parametrize(
+        "test, expected",
+        [
+            ([ [1,2], [30, np.nan] ], [30, np.nan])
+        ])
+
+def test_daily_max(test, expected):
+    npt.assert_array_equal(daily_max(np.array(test)), np.array(expected))
+
+        
 
 
 
