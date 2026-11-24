@@ -38,7 +38,7 @@ def standard_deviation(data):
     mmm = np.mean(data, axis=0)
     devs = []
     for entry in data:
-        devs.append((entry - mmm) * (entry - mmm))
+        devs.append((entry - mean_of_data) * (entry - mean_of_data))
 
     s_dev2 = sum(devs) / len(data)
     return {'standard deviation': s_dev2}
