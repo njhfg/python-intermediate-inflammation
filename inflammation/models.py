@@ -41,6 +41,17 @@ def daily_min(data):
     :returns: An array of the min value of measurements for each day."""
     return np.min(data, axis=0)
 
+
+def standard_deviation(data):
+    """Computes and returns a dictionary containing the standard deviation for data."""
+    mean_of_data = np.mean(data, axis=0)
+    devs = []
+    for entry in data:
+        devs.append((entry - mean_of_data) * (entry - mean_of_data))
+
+    s_dev2 = sum(devs) / len(data)
+    return {'standard deviation': s_dev2}
+  
 def patient_normalise(data):
     """Normalise patient data from a 2D inflamamtion data array.
     NaN values are ignored and normalised to 0.
