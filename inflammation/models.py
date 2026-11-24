@@ -2,8 +2,8 @@
 
 The Model layer is responsible for the 'business logic' part of the software.
 
-Patients' data is held in an inflammation table (2D array) where each row contains 
-inflammation data for a single patient taken over a number of days 
+Patients' data is held in an inflammation table (2D array) where each row contains
+inflammation data for a single patient taken over a number of days
 and each column represents a single day across all patients.
 """
 
@@ -49,10 +49,10 @@ def patient_normalise(data):
     if np.any(data<0):
         raise ValueError('Inflamamtion values should not be negative')
 
-    max = np.max(data, axis=1)
+    max_data = np.max(data, axis=1)
     with np.errstate(invalid='ignore', divide='ignore'):
-        normalised = data/max[:, np.newaxis]
-        
+        normalised = data/max_data[:, np.newaxis]
+
     normalised[np.isnan(normalised)] = 0
     normalised[normalised<0] = 0
     return normalised
